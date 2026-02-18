@@ -106,10 +106,10 @@ The following R packages are needed to run **AfrotheriAtlas**:
 
 ### Install Packages in R
 
-\\\R
+```R
 install.packages(c(
   "shiny", "leaflet", "sf", "terra", "dplyr", "DT", "mdd",
   "viridis", "shinycssloaders", "ggplot2", "rnaturalearth", "metR"
 ))
 
-\\\
+```

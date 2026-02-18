@@ -17,7 +17,7 @@ Before running the app, ensure you have the following R libraries installed:
 
 ```R
 install.packages(c(
-  "shiny", "leaflet", "sf", "terra", "dplyr", "DT", 
+  "shiny", "leaflet", "sf", "terra", "dplyr", "DT", "mdd",
   "viridis", "shinycssloaders", "ggplot2", "rnaturalearth", "metR"
 ))
 ```
@@ -46,7 +46,7 @@ Transforms the raw spatial data into a compressed `.rds` format and prepares the
 
 ### 2. Launching the App
 
-Once `afrotheria_cache.rds` and `afrotheria_richness_africa.tif` are generated, launch the interactive explorer:
+Launch the interactive explorer:
 
 ```R
 shiny::runApp("app.R")
@@ -86,30 +86,3 @@ The `isocline.R` script produces three distinct types of maps:
 
 - **Data Source:** [Mammal Diversity Database (MDD)](https://www.mammaldiversity.org/)
 - **Spatial Boundaries:** [Natural Earth](https://www.naturalearthdata.com/)
-
-### Required R Packages
-
-The following R packages are needed to run **AfrotheriAtlas**:
-
-- shiny
-- leaflet
-- sf
-- terra
-- dplyr
-- DT
-- viridis
-- shinycssloaders
-- ggplot2
-- rnaturalearth
-- metR
-- mdd (for downloading range maps)
-
-### Install Packages in R
-
-```R
-install.packages(c(
-  "shiny", "leaflet", "sf", "terra", "dplyr", "DT", "mdd",
-  "viridis", "shinycssloaders", "ggplot2", "rnaturalearth", "metR"
-))
-
-```

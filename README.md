@@ -28,7 +28,7 @@ Requires the `mdd` package for range map downloads.
 
 The project relies on a cached data structure for performance. Follow these steps:
 
-1. **Initialize Data:**
+1.1 **Initialize Data:**
 
 ```R
 source("load_afrotheres.R")
@@ -36,7 +36,7 @@ source("load_afrotheres.R")
 
 This script downloads the range maps for all Afrotherian species and generates the initial richness raster. It automatically incorporates manual fixes for species like the African Manatee (_Trichechus senegalensis_) via `missing_maps.R`.
 
-2. **Build Cache:**
+1.2 **Build Cache:**
 
 ```R
 source("build_afrothere_cache.R")

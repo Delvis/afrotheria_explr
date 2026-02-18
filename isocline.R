@@ -7,20 +7,12 @@ library(dplyr)
 library(viridis)
 
 # ----------------------------------
-# Load rasters
-# ----------------------------------
-
-files <- list.files(pattern = "\\.tif$", full.names = TRUE)
-rasters <- lapply(files, rast)
-afro_stack <- rast(rasters)
-
-# ----------------------------------
 # Compute richness (true integer)
 # ----------------------------------
 
-afro_richness <- app(afro_stack, sum, na.rm = TRUE)
+afro_richness <- rast("afrotheria_richness_africa.tif")
 ext_expanded <- ext(afro_richness)
-ext_expanded[3] <- ext_expanded[3] - 2  # Lower the Y-min (Southern boundary)
+ext_expanded[3] <- ext_expanded[3] - 3  # Lower the Y-min (Southern boundary)
 afro_extended <- extend(afro_richness, ext_expanded)
 
 # ----------------------------------
@@ -37,6 +29,11 @@ afro_smooth <- focal(
   NAonly = FALSE
 )
 
+# Rescale
+afro_smooth_scaled <- afro_smooth *
+  max(values(afro_richness)) /
+  max(values(afro_smooth))
+
 # ----------------------------------
 # Convert rasters to dataframes
 # ----------------------------------
@@ -45,7 +42,7 @@ afro_df <- as.data.frame(afro_richness, xy = TRUE)
 colnames(afro_df) <- c("x", "y", "richness")
 afro_df <- afro_df %>% filter(!is.na(richness) & richness > 0)
 
-afro_df_smooth <- as.data.frame(afro_smooth, xy = TRUE)
+afro_df_smooth <- as.data.frame(afro_smooth_scaled, xy = TRUE)
 colnames(afro_df_smooth) <- c("x", "y", "richness")
 afro_df_smooth <- afro_df_smooth %>% filter(!is.na(richness))
 
@@ -72,7 +69,7 @@ p_smooth <- ggplot() +
                breaks = breaks, color = "black", linewidth = 0.5) +
   geom_text_contour(data = afro_df_smooth, aes(x = x, y = y, z = richness),
                     breaks = breaks, size = 3, stroke = 0.2) +
-  labs(title = "Isoclines of Afrothere diversity across Africa (smoothed)",
+  labs(title = "Isoclines of Afrothere diversity across Africa (smoothed, d=1)",
        x = "Longitude", y = "Latitude") +
   theme_minimal(base_size = 14)
 
@@ -85,7 +82,7 @@ p_contours_raw <- ggplot() +
   geom_contour(data = afro_df, aes(x = x, y = y, z = richness),
                breaks = seq(1, max_r, 1), color = "black", linewidth = 0.4) +
   geom_text_contour(data = afro_df, aes(x = x, y = y, z = richness),
-                    breaks = seq(1, max_r, 1), size = 3, stroke = 0.2) +
+                    breaks = breaks, size = 3, stroke = 0.2) +
   labs(title = "Isoclines of Afrothere diversity across Africa (raw)",
        x = "Longitude", y = "Latitude") +
   theme_minimal(base_size = 14)
@@ -102,7 +99,7 @@ p_smooth_overlay <- ggplot() +
   geom_text_contour(data = afro_df_smooth, aes(x = x, y = y, z = richness),
                     breaks = breaks, size = 3, stroke = 0.2) +
   scale_fill_viridis(name = "Species Richness", option = "F", direction = -1) +
-  labs(title = "Afrotheria: species richness + smoothed isoclines",
+  labs(title = "Afrotheria: species richness + smoothed isoclines (d=1)",
        x = "Longitude", y = "Latitude") +
   theme_minimal(base_size = 14)
 

@@ -1,0 +1,10 @@
+name: afrotheria_explr
+title:
+username: afrotheria
+account: afrotheria
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16690242
+bundleId: 11591682
+url: https://afrotheria.shinyapps.io/afrotheria_explr/
+version: 1

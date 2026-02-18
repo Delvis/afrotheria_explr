@@ -73,13 +73,13 @@ The `isocline.R` script produces three distinct types of maps:
 ### Figures
 
 #### Smoothed Contours
-![Smoothed Contours](afro_richness_contours_smooth_half.png)  
-*Figure 1: Gaussian-smoothed richness contours showing regional trends with low smoothness (d = ½).*
+![Smoothed Contours](afro_richness_contours_smooth.png)  
+*Figure 1: Gaussian-smoothed richness contours showing regional trends with low smoothness (d = 1).*
 
 
 #### Afrotheria Richness Overlay
-![Afrotheria Richness Overlay](afro_richness_smooth_overlay.png)  
-*Figure 2: Smoothed isoclines (d = 1) of Afrotheria species richness overlaid on the high-resolution richness raster.*
+![Afrotheria Richness Overlay](afro_richness_smooth_overlay_x2.png)  
+*Figure 2: Smoothed isoclines (d = 2) of Afrotheria species richness overlaid on the high-resolution richness raster.*
 
 
 ## 📜 License & Data Credits
